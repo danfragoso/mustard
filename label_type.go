@@ -4,4 +4,7 @@ package mustard
 type LabelWidget struct {
 	Widget
 	content string
+
+	fontSize  float64
+	fontColor string
 }

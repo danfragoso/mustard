@@ -60,13 +60,7 @@ func (window *Window) loop() {
 			window.surface.SetFillStyle("#FFF")
 			window.surface.FillRect(0, 0, float64(window.Width), float64(window.Height))
 
-			for _, widget := range window.Widgets {
-				switch widget.(type) {
-				case *LabelWidget:
-					drawLabelWidget(widget.(*LabelWidget), window.surface)
-				}
-			}
-
+			drawWidgets(window.Widgets, window.surface, 0, 0)
 			window.glw.SwapBuffers()
 		}
 
