@@ -60,7 +60,7 @@ func (window *Window) loop() {
 			window.surface.SetFillStyle("#FFF")
 			window.surface.FillRect(0, 0, float64(window.Width), float64(window.Height))
 
-			drawWidgets(window.Widgets, window.surface, 0, 0)
+			drawWidgets(window.Widgets, window.surface, 0, 0, window.Width, window.Height)
 			window.glw.SwapBuffers()
 		}
 
@@ -77,5 +77,5 @@ func (window *Window) AttachWidget(widget interface{}) {
 func (window *Window) Show() {
 	window.isDirty = true
 	window.glw.Show()
-	go window.loop()
+	window.loop()
 }

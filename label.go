@@ -31,3 +31,8 @@ func (label *LabelWidget) SetFontColor(fontColor string) {
 		label.dirty = true
 	}
 }
+
+//SetLayoutOrientation - Sets the orientation for the layout
+func (label *LabelWidget) SetLayoutOrientation(orientation WidgetOrientation) {
+	label.orientation = orientation
+}

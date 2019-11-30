@@ -9,13 +9,21 @@ func TestMain(t *testing.T) {
 
 	mainWindow := app.CreateWindow("Inicio", 100, 100, 10, 10)
 
-	label := CreateLabelWidget("memes")
+	A := CreateLabelWidget("A")
+	B := CreateLabelWidget("B")
+	C := CreateLabelWidget("C")
+	D := CreateLabelWidget("D")
+	E := CreateLabelWidget("E")
 
-	label.SetFontColor("#0f0")
-	label.SetFontSize(20)
-	label.AttachWidget(CreateLabelWidget("oof"))
-
-	mainWindow.AttachWidget(label)
+	A.AttachWidget(B)
+	A.AttachWidget(C)
+	C.AttachWidget(D)
+	C.SetLayoutOrientation(ColumnWidgetOrientation)
+	D.AttachWidget(E)
+	D.SetLayoutOrientation(ColumnWidgetOrientation)
+	E.AttachWidget(CreateLabelWidget("F"))
+	E.SetLayoutOrientation(ColumnWidgetOrientation)
+	mainWindow.AttachWidget(A)
 	mainWindow.Show()
 
 	for index := 0; index < 9999999999; index++ {
