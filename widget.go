@@ -5,14 +5,16 @@ import (
 )
 
 func drawLabelWidget(widget *LabelWidget, surface *canvas.Canvas, top, left, width, height int) {
-	surface.SetStrokeStyle("#ffa500")
-	surface.SetLineWidth(3)
+	//surface.SetStrokeStyle("#ffa500")
+	///surface.SetLineWidth(3)
 
-	var dashStyle []float64
+	//var dashStyle []float64
 
-	dashStyle = append(dashStyle, 4)
-	surface.SetLineDash(dashStyle)
-	surface.StrokeRect(float64(left+3), float64(top+3), float64(width-6), float64(height-6))
+	//dashStyle = append(dashStyle, 4)
+	//surface.SetLineDash(dashStyle)
+	//surface.StrokeRect(float64(left+3), float64(top+3), float64(width-6), float64(height-6))
+	surface.SetFillStyle(widget.backgroundColor)
+	surface.FillRect(float64(left), float64(top), float64(width), float64(height))
 
 	surface.SetFillStyle(widget.fontColor)
 	surface.SetFont("roboto.ttf", widget.fontSize)

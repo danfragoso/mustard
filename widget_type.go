@@ -17,5 +17,6 @@ type Widget struct {
 
 	widgets []interface{}
 
-	orientation WidgetOrientation
+	backgroundColor string
+	orientation     WidgetOrientation
 }

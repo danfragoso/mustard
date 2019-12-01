@@ -5,7 +5,7 @@ func CreateLabelWidget(content string) *LabelWidget {
 	var widgets []interface{}
 
 	return &LabelWidget{
-		Widget:  Widget{0, 0, 100, 100, true, widgets, RowWidgetOrientation},
+		Widget:  Widget{0, 0, 100, 100, true, widgets, "#fff", RowWidgetOrientation},
 		content: content,
 
 		fontSize:  20,
@@ -28,6 +28,14 @@ func (label *LabelWidget) SetFontSize(fontSize float64) {
 func (label *LabelWidget) SetFontColor(fontColor string) {
 	if len(fontColor) > 0 && string(fontColor[0]) == "#" {
 		label.fontColor = fontColor
+		label.dirty = true
+	}
+}
+
+//SetBackgroundColor - Sets the label background color
+func (label *LabelWidget) SetBackgroundColor(backgroundColor string) {
+	if len(backgroundColor) > 0 && string(backgroundColor[0]) == "#" {
+		label.backgroundColor = backgroundColor
 		label.dirty = true
 	}
 }
