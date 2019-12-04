@@ -9,17 +9,23 @@ func TestMain(t *testing.T) {
 
 	mainWindow := app.CreateWindow("Inicio", 100, 100, 10, 10)
 
-	A := CreateLabelWidget("A")
-	B := CreateLabelWidget("B")
-	C := CreateLabelWidget("C")
-	D := CreateLabelWidget("D")
+	rootFrame := CreateFrame(HorizontalFrame)
 
-	A.AttachWidget(B)
-	A.AttachWidget(C)
-	C.AttachWidget(D)
-	C.SetLayoutOrientation(ColumnWidgetOrientation)
+	left := CreateLabelWidget("left")
+	center := CreateLabelWidget("center")
+	right := CreateLabelWidget("right")
 
-	mainWindow.AttachWidget(A)
+	topBar := CreateFrame(VerticalFrame)
+	viewport := CreateFrame(HorizontalFrame)
+
+	topBar.AttachWidget(left)
+	topBar.AttachWidget(center)
+	topBar.AttachWidget(right)
+
+	rootFrame.AttachWidget(topBar)
+	rootFrame.AttachWidget(viewport)
+
+	mainWindow.SetRootFrame(rootFrame)
 	mainWindow.Show()
 
 	for index := 0; index < 9999999999; index++ {

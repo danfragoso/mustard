@@ -8,19 +8,19 @@ import (
 
 //Window - Mustard window
 type Window struct {
-	Visible     bool
-	Initialized bool
+	visible     bool
+	initialized bool
 
-	Title string
+	title string
 
-	Width  int
-	Height int
+	width  int
+	height int
 
-	Top  int
-	Left int
+	top  int
+	left int
 
-	Widgets []interface{}
-	isDirty bool
+	rootFrame *Frame
+	isDirty   bool
 
 	glw     *glfw.Window
 	surface *canvas.Canvas

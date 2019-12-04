@@ -12,18 +12,18 @@ import (
 func newWindow(windowTitle string, width int, height int, top int, left int) *Window {
 	window := Window{}
 
-	window.Visible = false
-	window.Initialized = false
+	window.visible = false
+	window.initialized = false
 
-	window.Title = windowTitle
+	window.title = windowTitle
 
-	window.Width = width
-	window.Height = height
+	window.width = width
+	window.height = height
 
-	window.Top = top
-	window.Left = left
+	window.top = top
+	window.left = left
 
-	glw, err := glfw.CreateWindow(window.Width, window.Height, window.Title, nil, nil)
+	glw, err := glfw.CreateWindow(window.width, window.height, window.title, nil, nil)
 	if err != nil {
 		log.Fatalf("Error creating window: %v", err)
 	}
@@ -52,15 +52,16 @@ func newWindow(windowTitle string, width int, height int, top int, left int) *Wi
 
 func (window *Window) loop() {
 	for !window.glw.ShouldClose() {
-		window.Width, window.Height = window.glw.GetSize()
+		window.width, window.height = window.glw.GetSize()
 
 		if window.isDirty {
 			window.glw.MakeContextCurrent()
-			window.backend.SetBounds(0, 0, window.Width, window.Height)
-			window.surface.SetFillStyle("#FFF")
-			window.surface.FillRect(0, 0, float64(window.Width), float64(window.Height))
+			window.backend.SetBounds(0, 0, window.width, window.height)
 
-			drawWidgets(window.Widgets, window.surface, 0, 0, window.Width, window.Height)
+			window.surface.SetFillStyle("#FFF")
+			window.surface.FillRect(0, 0, float64(window.width), float64(window.height))
+
+			drawRootFrame(window)
 			window.glw.SwapBuffers()
 		}
 
@@ -68,9 +69,9 @@ func (window *Window) loop() {
 	}
 }
 
-//AttachWidget - Attaches a new widget to the window
-func (window *Window) AttachWidget(widget interface{}) {
-	window.Widgets = append(window.Widgets, widget)
+//SetRootFrame - Sets the window root frame
+func (window *Window) SetRootFrame(frame *Frame) {
+	window.rootFrame = frame
 }
 
 //Show - Show the window

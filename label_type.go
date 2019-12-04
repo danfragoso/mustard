@@ -2,7 +2,7 @@ package mustard
 
 //LabelWidget - Label Widget
 type LabelWidget struct {
-	Widget
+	widget
 	content string
 
 	fontSize  float64

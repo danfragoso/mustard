@@ -1,22 +1,14 @@
 package mustard
 
-type WidgetOrientation int
-
-const (
-	RowWidgetOrientation WidgetOrientation = iota
-	ColumnWidgetOrientation
-)
-
-type Widget struct {
-	top    float64
-	left   float64
-	width  float64
-	height float64
+type widget struct {
+	top    int
+	left   int
+	width  int
+	height int
 
 	dirty bool
 
 	widgets []interface{}
 
 	backgroundColor string
-	orientation     WidgetOrientation
 }

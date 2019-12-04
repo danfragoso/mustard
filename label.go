@@ -5,7 +5,7 @@ func CreateLabelWidget(content string) *LabelWidget {
 	var widgets []interface{}
 
 	return &LabelWidget{
-		Widget:  Widget{0, 0, 100, 100, true, widgets, "#fff", RowWidgetOrientation},
+		widget:  widget{0, 0, 100, 100, true, widgets, "#fff"},
 		content: content,
 
 		fontSize:  20,
@@ -38,9 +38,4 @@ func (label *LabelWidget) SetBackgroundColor(backgroundColor string) {
 		label.backgroundColor = backgroundColor
 		label.dirty = true
 	}
-}
-
-//SetLayoutOrientation - Sets the orientation for the layout
-func (label *LabelWidget) SetLayoutOrientation(orientation WidgetOrientation) {
-	label.orientation = orientation
 }
