@@ -15,12 +15,21 @@ func TestMain(t *testing.T) {
 	center := CreateLabelWidget("center")
 	right := CreateLabelWidget("right")
 
+	left.SetBackgroundColor("#ff0000")
+	left.SetWidth(30)
+
+	center.SetBackgroundColor("#00ff00")
+
+	right.SetBackgroundColor("#0000ff")
+	right.SetWidth(30)
+
 	topBar := CreateFrame(VerticalFrame)
 	viewport := CreateFrame(HorizontalFrame)
 
 	topBar.AttachWidget(left)
 	topBar.AttachWidget(center)
 	topBar.AttachWidget(right)
+	topBar.SetHeight(30)
 
 	rootFrame.AttachWidget(topBar)
 	rootFrame.AttachWidget(viewport)

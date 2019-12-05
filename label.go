@@ -5,7 +5,18 @@ func CreateLabelWidget(content string) *LabelWidget {
 	var widgets []interface{}
 
 	return &LabelWidget{
-		widget:  widget{0, 0, 100, 100, true, widgets, "#fff"},
+		widget: widget{
+			top:  0,
+			left: 0,
+
+			width:  0,
+			height: 0,
+
+			dirty:   true,
+			widgets: widgets,
+
+			backgroundColor: "#fff",
+		},
 		content: content,
 
 		fontSize:  20,
@@ -16,6 +27,18 @@ func CreateLabelWidget(content string) *LabelWidget {
 //AttachWidget - Attaches a new widget to the window
 func (label *LabelWidget) AttachWidget(widget interface{}) {
 	label.widgets = append(label.widgets, widget)
+}
+
+//SetWidth - Sets the label width
+func (label *LabelWidget) SetWidth(width int) {
+	label.width = width
+	label.fixedWidth = true
+}
+
+//SetHeight - Sets the label height
+func (label *LabelWidget) SetHeight(height int) {
+	label.height = height
+	label.fixedHeight = true
 }
 
 //SetFontSize - Sets the label font size

@@ -22,5 +22,5 @@ func drawLabelWidget(surface *canvas.Canvas, widget *LabelWidget, top, left, wid
 	surface.SetFont("roboto.ttf", widget.fontSize)
 	surface.FillText(widget.content, float64(left), float64(top)+widget.fontSize/2+2)
 
-	debugLayout(surface, top, left, width, height)
+	//debugLayout(surface, top, left, width, height)
 }

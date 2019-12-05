@@ -6,7 +6,9 @@ type widget struct {
 	width  int
 	height int
 
-	dirty bool
+	dirty       bool
+	fixedWidth  bool
+	fixedHeight bool
 
 	widgets []interface{}
 
