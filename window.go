@@ -62,28 +62,26 @@ func newWindow(windowTitle string, width int, height int, top int, left int) *Wi
 	return &window
 }
 
-func (window *Window) loop() {
-	for !window.close {
-		window.fireEvents()
-		window.updateSize()
+func (window *Window) processFrame() {
+	window.fireEvents()
+	window.updateSize()
 
-		if window.isDirty {
-			window.sdlw.GLMakeCurrent(window.glContext)
+	if window.isDirty {
+		window.sdlw.GLMakeCurrent(window.glContext)
 
-			window.backend.SetBounds(0, 0, window.width, window.height)
+		window.backend.SetBounds(0, 0, window.width, window.height)
 
-			window.surface.SetFillStyle("#FFF")
-			window.surface.FillRect(0, 0, float64(window.width), float64(window.height))
+		window.surface.SetFillStyle("#FFF")
+		window.surface.FillRect(0, 0, float64(window.width), float64(window.height))
 
-			drawRootFrame(window)
+		drawRootFrame(window)
 
-			if window.frames > 0 {
-				window.isDirty = false
-			}
-
-			window.sdlw.GLSwap()
-			window.frames = window.frames + 1
+		if window.frames > 0 {
+			window.isDirty = false
 		}
+
+		window.sdlw.GLSwap()
+		window.frames = window.frames + 1
 	}
 }
 
@@ -95,7 +93,13 @@ func (window *Window) SetRootFrame(frame *Frame) {
 //Show - Show the window
 func (window *Window) Show() {
 	window.sdlw.Show()
-	window.loop()
+	window.visible = true
+}
+
+//Hide - Hide the window
+func (window *Window) Hide() {
+	window.sdlw.Hide()
+	window.visible = false
 }
 
 //updateSize - Update the window size

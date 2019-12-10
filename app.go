@@ -40,6 +40,21 @@ func (app *App) CreateWindow(windowTitle string, width int, height int, top int,
 	return window
 }
 
+//Run - Run the app
+func (app *App) Run(callback func()) {
+	for _, window := range app.windows {
+		if window.visible {
+
+			if !window.close {
+				window.processFrame()
+			}
+		}
+	}
+
+	callback()
+	app.Run(callback)
+}
+
 func (app *App) addWindow(window *Window) {
-	app.Windows = append(app.Windows, window)
+	app.windows = append(app.windows, window)
 }

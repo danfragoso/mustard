@@ -37,7 +37,6 @@ func TestMain(t *testing.T) {
 	mainWindow.SetRootFrame(rootFrame)
 	mainWindow.Show()
 
-	for {
-
-	}
+	app.Run(func() {
+	})
 }
