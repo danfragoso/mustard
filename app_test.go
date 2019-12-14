@@ -37,8 +37,9 @@ func TestMain(t *testing.T) {
 	mainWindow.SetRootFrame(rootFrame)
 	mainWindow.Show()
 
-	for index := 0; index < 9999999999; index++ {
-	}
+	app.Run(func() {
+
+	})
 
 	t.Log(app)
 }

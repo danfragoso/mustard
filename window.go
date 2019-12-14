@@ -47,26 +47,30 @@ func newWindow(windowTitle string, width int, height int, top int, left int) *Wi
 	window.backend = backend
 	window.surface = canvas.New(backend)
 
+	window.glw.SetSizeCallback(func(w *glfw.Window, width, height int) {
+		window.width = width
+		window.height = height
+
+		window.backend.SetBounds(0, 0, window.width, window.height)
+		window.isDirty = true
+	})
+
 	return &window
 }
 
-func (window *Window) loop() {
-	for !window.glw.ShouldClose() {
-		window.width, window.height = window.glw.GetSize()
+func (window *Window) processFrame() {
+	if window.isDirty {
+		window.isDirty = false
+		window.glw.MakeContextCurrent()
 
-		if window.isDirty {
-			window.glw.MakeContextCurrent()
-			window.backend.SetBounds(0, 0, window.width, window.height)
+		window.surface.SetFillStyle("#FFF")
+		window.surface.FillRect(0, 0, float64(window.width), float64(window.height))
 
-			window.surface.SetFillStyle("#FFF")
-			window.surface.FillRect(0, 0, float64(window.width), float64(window.height))
-
-			drawRootFrame(window)
-			window.glw.SwapBuffers()
-		}
-
-		glfw.WaitEvents()
+		drawRootFrame(window)
+		window.glw.SwapBuffers()
 	}
+
+	glfw.WaitEvents()
 }
 
 //SetRootFrame - Sets the window root frame
@@ -77,6 +81,6 @@ func (window *Window) SetRootFrame(frame *Frame) {
 //Show - Show the window
 func (window *Window) Show() {
 	window.isDirty = true
+	window.visible = true
 	window.glw.Show()
-	window.loop()
 }
