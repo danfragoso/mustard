@@ -4,5 +4,5 @@ package mustard
 type App struct {
 	Name string
 
-	windows []*Window
+	Windows []*Window
 }

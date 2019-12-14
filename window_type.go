@@ -1,9 +1,9 @@
 package mustard
 
 import (
+	"github.com/go-gl/glfw/v3.2/glfw"
 	"github.com/tfriedel6/canvas"
 	"github.com/tfriedel6/canvas/backend/goglbackend"
-	"github.com/veandco/go-sdl2/sdl"
 )
 
 //Window - Mustard window
@@ -21,14 +21,8 @@ type Window struct {
 
 	rootFrame *Frame
 	isDirty   bool
-	close     bool
 
-	sdlw    *sdl.Window
-	sdlwID  uint32
+	glw     *glfw.Window
 	surface *canvas.Canvas
-
-	backend   *goglbackend.GoGLBackend
-	glContext sdl.GLContext
-
-	frames int64
+	backend *goglbackend.GoGLBackend
 }
