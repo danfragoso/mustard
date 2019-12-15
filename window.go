@@ -55,6 +55,10 @@ func newWindow(windowTitle string, width int, height int, top int, left int) *Wi
 		window.isDirty = true
 	})
 
+	window.glw.SetCursorPosCallback(func(w *glfw.Window, x, y float64) {
+		pointerCoordEvent(&window, x, y)
+	})
+
 	return &window
 }
 

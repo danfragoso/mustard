@@ -69,6 +69,8 @@ func drawFrame(surface *canvas.Canvas, frame *Frame, top, left, width, height in
 				drawFrame(surface, frame.widgets[i].(*Frame), childrenLayout[i].top, childrenLayout[i].left, childrenLayout[i].width, childrenLayout[i].height)
 			case *LabelWidget:
 				drawLabelWidget(surface, frame.widgets[i].(*LabelWidget), childrenLayout[i].top, childrenLayout[i].left, childrenLayout[i].width, childrenLayout[i].height)
+			case *ButtonWidget:
+				drawButtonWidget(surface, frame.widgets[i].(*ButtonWidget), childrenLayout[i].top, childrenLayout[i].left, childrenLayout[i].width, childrenLayout[i].height)
 			}
 		}
 	}
@@ -86,6 +88,9 @@ func getCoreWidgets(widgets []interface{}) []*widget {
 			coreWidgets = append(coreWidgets, &widget.widget)
 		case *LabelWidget:
 			widget := widgets[i].(*LabelWidget)
+			coreWidgets = append(coreWidgets, &widget.widget)
+		case *ButtonWidget:
+			widget := widgets[i].(*ButtonWidget)
 			coreWidgets = append(coreWidgets, &widget.widget)
 		}
 	}

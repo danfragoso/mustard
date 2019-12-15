@@ -13,4 +13,12 @@ type widget struct {
 	widgets []interface{}
 
 	backgroundColor string
+
+	selectable bool
+	focusable  bool
+	clickable  bool
+
+	focused  bool
+	clicked  bool
+	selected bool
 }

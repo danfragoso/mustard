@@ -26,6 +26,7 @@ func TestMain(t *testing.T) {
 	topBar := CreateFrame(VerticalFrame)
 	viewport := CreateFrame(HorizontalFrame)
 
+	viewport.AttachWidget(CreateButtonWidget("Click me!"))
 	topBar.AttachWidget(left)
 	topBar.AttachWidget(center)
 	topBar.AttachWidget(right)
