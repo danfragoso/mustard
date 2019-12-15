@@ -1,5 +1,7 @@
 package mustard
 
+import "github.com/go-gl/glfw/v3.2/glfw"
+
 //CreateLabelWidget - Creates and returns a new Label Widget
 func CreateLabelWidget(content string) *LabelWidget {
 	var widgets []interface{}
@@ -14,6 +16,10 @@ func CreateLabelWidget(content string) *LabelWidget {
 
 			dirty:   true,
 			widgets: widgets,
+
+			ref: "label",
+
+			cursor: glfw.CreateStandardCursor(glfw.ArrowCursor),
 
 			backgroundColor: "#fff",
 		},

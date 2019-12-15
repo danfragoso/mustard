@@ -1,5 +1,7 @@
 package mustard
 
+import "github.com/go-gl/glfw/v3.2/glfw"
+
 type widget struct {
 	top    int
 	left   int
@@ -13,6 +15,11 @@ type widget struct {
 	widgets []interface{}
 
 	backgroundColor string
+
+	ref    string
+	cursor *glfw.Cursor
+
+	padding int
 
 	selectable bool
 	focusable  bool

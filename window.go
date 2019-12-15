@@ -23,6 +23,9 @@ func newWindow(windowTitle string, width int, height int, top int, left int) *Wi
 	window.top = top
 	window.left = left
 
+	window.defaultCursor = glfw.CreateStandardCursor(glfw.ArrowCursor)
+	window.currentCursor = window.defaultCursor
+
 	glw, err := glfw.CreateWindow(window.width, window.height, window.title, nil, nil)
 	if err != nil {
 		log.Fatalf("Error creating window: %v", err)
@@ -56,7 +59,7 @@ func newWindow(windowTitle string, width int, height int, top int, left int) *Wi
 	})
 
 	window.glw.SetCursorPosCallback(func(w *glfw.Window, x, y float64) {
-		pointerCoordEvent(&window, x, y)
+		go pointerCoordEvent(&window, x, y)
 	})
 
 	return &window

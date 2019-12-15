@@ -22,6 +22,9 @@ type Window struct {
 	rootFrame *Frame
 	isDirty   bool
 
+	defaultCursor *glfw.Cursor
+	currentCursor *glfw.Cursor
+
 	glw     *glfw.Window
 	surface *canvas.Canvas
 	backend *goglbackend.GoGLBackend

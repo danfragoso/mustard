@@ -3,27 +3,31 @@ package mustard
 func pointerCoordEvent(window *Window, x, y float64) {
 	widgets := window.rootFrame.widgets
 
-	getFocusedWidget(window, widgets, x, y)
+	focusedWidget := getFocusedWidget(getCoreWidgets(widgets), x, y)
+	if focusedWidget != nil {
+		window.currentCursor = focusedWidget.cursor
+		focusedWidget.focused = true
+		window.isDirty = true
+	} else {
+		window.currentCursor = window.defaultCursor
+	}
+
+	window.glw.SetCursor(window.currentCursor)
 }
 
-func getFocusedWidget(window *Window, widgets []interface{}, x, y float64) {
-	for i := 0; i < len(widgets); i++ {
-		switch widgets[i].(type) {
-		case *Frame:
-			widget := widgets[i].(*Frame)
-			if widget.focusable {
-				widget.cursorIntersection(window, x, y)
-			}
-		case *LabelWidget:
-			widget := widgets[i].(*LabelWidget)
-			if widget.focusable {
-				widget.cursorIntersection(window, x, y)
-			}
-		case *ButtonWidget:
-			widget := widgets[i].(*ButtonWidget)
-			if widget.focusable {
-				widget.cursorIntersection(window, x, y)
+func getFocusedWidget(widgets []*widget, x, y float64) *widget {
+	var focusedWidget *widget
+	for _, widget := range widgets {
+		widget.focused = false
+
+		if len(widget.widgets) > 0 {
+			focusedWidget = getFocusedWidget(getCoreWidgets(widget.widgets), x, y)
+		} else {
+			if calcCursorIntersection(widget, x, y) {
+				focusedWidget = widget
 			}
 		}
 	}
+
+	return focusedWidget
 }

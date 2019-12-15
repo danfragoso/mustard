@@ -16,6 +16,8 @@ func CreateFrame(orientation FrameOrientation) *Frame {
 			width:  100,
 			height: 100,
 
+			ref: "frame",
+
 			dirty:   true,
 			widgets: widgets,
 
@@ -66,11 +68,29 @@ func drawFrame(surface *canvas.Canvas, frame *Frame, top, left, width, height in
 		for i := 0; i < childrenLen; i++ {
 			switch frame.widgets[i].(type) {
 			case *Frame:
-				drawFrame(surface, frame.widgets[i].(*Frame), childrenLayout[i].top, childrenLayout[i].left, childrenLayout[i].width, childrenLayout[i].height)
+				frame := frame.widgets[i].(*Frame)
+				frame.top = childrenLayout[i].top
+				frame.left = childrenLayout[i].left
+				frame.width = childrenLayout[i].width
+				frame.height = childrenLayout[i].height
+
+				drawFrame(surface, frame, childrenLayout[i].top, childrenLayout[i].left, childrenLayout[i].width, childrenLayout[i].height)
 			case *LabelWidget:
-				drawLabelWidget(surface, frame.widgets[i].(*LabelWidget), childrenLayout[i].top, childrenLayout[i].left, childrenLayout[i].width, childrenLayout[i].height)
+				label := frame.widgets[i].(*LabelWidget)
+				label.top = childrenLayout[i].top
+				label.left = childrenLayout[i].left
+				label.width = childrenLayout[i].width
+				label.height = childrenLayout[i].height
+
+				drawLabelWidget(surface, label, childrenLayout[i].top, childrenLayout[i].left, childrenLayout[i].width, childrenLayout[i].height)
 			case *ButtonWidget:
-				drawButtonWidget(surface, frame.widgets[i].(*ButtonWidget), childrenLayout[i].top, childrenLayout[i].left, childrenLayout[i].width, childrenLayout[i].height)
+				button := frame.widgets[i].(*ButtonWidget)
+				button.top = childrenLayout[i].top
+				button.left = childrenLayout[i].left
+				button.width = childrenLayout[i].width
+				button.height = childrenLayout[i].height
+
+				drawButtonWidget(surface, button, childrenLayout[i].top, childrenLayout[i].left, childrenLayout[i].width, childrenLayout[i].height)
 			}
 		}
 	}

@@ -1,5 +1,7 @@
 package mustard
 
+import "github.com/go-gl/glfw/v3.2/glfw"
+
 //CreateButtonWidget - Creates and returns a new Button Widget
 func CreateButtonWidget(content string) *ButtonWidget {
 	var widgets []interface{}
@@ -14,6 +16,12 @@ func CreateButtonWidget(content string) *ButtonWidget {
 
 			dirty:   true,
 			widgets: widgets,
+
+			padding: 5,
+
+			ref: "button",
+
+			cursor: glfw.CreateStandardCursor(glfw.HandCursor),
 
 			clickable: true,
 			focusable: true,
