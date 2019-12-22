@@ -1,6 +1,6 @@
 package mustard
 
-import "github.com/go-gl/glfw/v3.2/glfw"
+import "github.com/go-gl/glfw/v3.3/glfw"
 
 //CreateApp - Creates and returns a new mustard app
 func CreateApp(name string) *App {

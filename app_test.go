@@ -24,13 +24,12 @@ func TestMain(t *testing.T) {
 	right.SetWidth(30)
 
 	topBar := CreateFrame(VerticalFrame)
-	viewport := CreateFrame(VerticalFrame)
+	viewport := CreateFrame(HorizontalFrame)
 
-	viewport.AttachWidget(CreateButtonWidget("Click"))
-	viewport.AttachWidget(CreateButtonWidget("Clock"))
-	viewport.AttachWidget(CreateButtonWidget("Clack"))
-
-	viewport.SetHeight(40)
+	viewport.AttachWidget(CreateButtonWidget("Click me!", func() {}))
+	viewport.AttachWidget(CreateLabelWidget("memes"))
+	viewport.AttachWidget(CreateLabelWidget("memes"))
+	viewport.AttachWidget(CreateLabelWidget("memes"))
 
 	topBar.AttachWidget(left)
 	topBar.AttachWidget(center)

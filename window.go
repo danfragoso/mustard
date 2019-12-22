@@ -3,8 +3,8 @@ package mustard
 import (
 	"log"
 
-	"github.com/go-gl/gl/v3.2-core/gl"
-	"github.com/go-gl/glfw/v3.2/glfw"
+	"github.com/go-gl/gl/v3.3-core/gl"
+	"github.com/go-gl/glfw/v3.3/glfw"
 	"github.com/tfriedel6/canvas"
 	"github.com/tfriedel6/canvas/backend/goglbackend"
 )
@@ -71,7 +71,7 @@ func (window *Window) processFrame() {
 		window.glw.MakeContextCurrent()
 
 		window.surface.SetFillStyle("#FFF")
-		window.surface.FillRect(0, 0, float64(window.width), float64(window.height))
+		//window.surface.FillRect(0, 0, float64(window.width), float64(window.height))
 
 		drawRootFrame(window)
 		window.glw.SwapBuffers()

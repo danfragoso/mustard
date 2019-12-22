@@ -1,6 +1,6 @@
 package mustard
 
-import "github.com/go-gl/glfw/v3.2/glfw"
+import "github.com/go-gl/glfw/v3.3/glfw"
 
 //CreateLabelWidget - Creates and returns a new Label Widget
 func CreateLabelWidget(content string) *LabelWidget {
@@ -50,6 +50,12 @@ func (label *LabelWidget) SetHeight(height int) {
 //SetFontSize - Sets the label font size
 func (label *LabelWidget) SetFontSize(fontSize float64) {
 	label.fontSize = fontSize
+	label.dirty = true
+}
+
+//SetContent - Sets the label content
+func (label *LabelWidget) SetContent(content string) {
+	label.content = content
 	label.dirty = true
 }
 
