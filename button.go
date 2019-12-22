@@ -3,7 +3,7 @@ package mustard
 import "github.com/go-gl/glfw/v3.3/glfw"
 
 //CreateButtonWidget - Creates and returns a new Button Widget
-func CreateButtonWidget(content string, callback ButtonClickCallback) *ButtonWidget {
+func CreateButtonWidget(content string, callback WidgetClickCallback) *ButtonWidget {
 	var widgets []interface{}
 
 	return &ButtonWidget{
@@ -27,9 +27,8 @@ func CreateButtonWidget(content string, callback ButtonClickCallback) *ButtonWid
 			focusable: true,
 
 			backgroundColor: "#fff",
+			onClick:         callback,
 		},
-
-		onClick: callback,
 		content: content,
 	}
 }

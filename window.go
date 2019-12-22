@@ -62,6 +62,15 @@ func newWindow(windowTitle string, width int, height int, top int, left int) *Wi
 		go pointerCoordEvent(&window, x, y)
 	})
 
+	window.glw.SetMouseButtonCallback(func(w *glfw.Window, button glfw.MouseButton, action glfw.Action, mods glfw.ModifierKey) {
+
+		if button == glfw.MouseButtonLeft && action == 1 && window.currentFocusedWidget != nil {
+			window.currentFocusedWidget.onClick()
+
+			window.isDirty = true
+		}
+	})
+
 	return &window
 }
 

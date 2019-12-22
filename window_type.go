@@ -25,6 +25,8 @@ type Window struct {
 	defaultCursor *glfw.Cursor
 	currentCursor *glfw.Cursor
 
+	currentFocusedWidget *widget
+
 	glw     *glfw.Window
 	surface *canvas.Canvas
 	backend *goglbackend.GoGLBackend

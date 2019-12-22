@@ -6,9 +6,12 @@ func pointerCoordEvent(window *Window, x, y float64) {
 	focusedWidget := getFocusedWidget(getCoreWidgets(widgets), x, y)
 	if focusedWidget != nil {
 		window.currentCursor = focusedWidget.cursor
+		window.currentFocusedWidget = focusedWidget
+
 		focusedWidget.focused = true
 		window.isDirty = true
 	} else {
+		window.currentFocusedWidget = nil
 		window.currentCursor = window.defaultCursor
 	}
 

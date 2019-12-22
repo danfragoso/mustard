@@ -2,6 +2,9 @@ package mustard
 
 import "github.com/go-gl/glfw/v3.3/glfw"
 
+//ButtonClickCallback - The click event callback
+type WidgetClickCallback func()
+
 type widget struct {
 	top    int
 	left   int
@@ -28,4 +31,6 @@ type widget struct {
 	focused  bool
 	clicked  bool
 	selected bool
+
+	onClick WidgetClickCallback
 }

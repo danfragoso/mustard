@@ -44,7 +44,7 @@ func drawButtonWidget(surface *canvas.Canvas, widget *ButtonWidget, top, left, w
 	if widget.focused {
 		buttonBackgroundColor = buttonBorderColor
 
-		widget.onClick()
+		//widget.onClick()
 	}
 
 	surface.SetFillStyle(buttonBackgroundColor)

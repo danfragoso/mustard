@@ -59,6 +59,11 @@ func (label *LabelWidget) SetContent(content string) {
 	label.dirty = true
 }
 
+//GetContent - Gets the label content
+func (label *LabelWidget) GetContent() string {
+	return label.content
+}
+
 //SetFontColor - Sets the label font color
 func (label *LabelWidget) SetFontColor(fontColor string) {
 	if len(fontColor) > 0 && string(fontColor[0]) == "#" {
