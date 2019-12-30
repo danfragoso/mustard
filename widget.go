@@ -35,6 +35,13 @@ func drawLabelWidget(surface *canvas.Canvas, widget *LabelWidget, top, left, wid
 	//debugLayout(surface, top, left, width, height)
 }
 
+func drawSurfaceWidget(surface *canvas.Canvas, surfaceWidget *SurfaceWidget, top, left, width, height int) {
+	surface.FillRect(float64(left), float64(top), float64(width), float64(height))
+
+	surfaceWidget.renderCallback(surfaceWidget.windowSurface)
+	debugLayout(surface, top, left, width, height)
+}
+
 func drawButtonWidget(surface *canvas.Canvas, widget *ButtonWidget, top, left, width, height int) {
 	buttonBackgroundColor := "#f2f2f2"
 	buttonBorderColor := "#e0e0e0"

@@ -3,6 +3,8 @@ package mustard
 import (
 	"strconv"
 	"testing"
+
+	"github.com/tfriedel6/canvas"
 )
 
 func TestMain(t *testing.T) {
@@ -12,6 +14,7 @@ func TestMain(t *testing.T) {
 	rootFrame := CreateFrame(HorizontalFrame)
 
 	text := CreateLabelWidget("0")
+	rawSurface := CreateSurfaceWidget(mainWindow, drawBrowserFrame)
 	buttons := CreateFrame(VerticalFrame)
 
 	buttons.SetHeight(100)
@@ -31,6 +34,8 @@ func TestMain(t *testing.T) {
 	buttons.AttachWidget(plusOne)
 	buttons.AttachWidget(minusOne)
 
+	rootFrame.AttachWidget(rawSurface)
+	//rootFrame.AttachWidget(CreateLabelWidget("memes"))
 	rootFrame.AttachWidget(text)
 	rootFrame.AttachWidget(buttons)
 
@@ -38,8 +43,13 @@ func TestMain(t *testing.T) {
 	mainWindow.Show()
 
 	app.Run(func() {
-
+		t.Log("memes")
 	})
 
 	t.Log(app)
+}
+
+func drawBrowserFrame(surface *canvas.Canvas) {
+	surface.SetFillStyle("#ff0000")
+	surface.FillRect(10, 10, 20, 20)
 }
