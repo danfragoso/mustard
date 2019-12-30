@@ -35,7 +35,6 @@ func TestMain(t *testing.T) {
 	buttons.AttachWidget(minusOne)
 
 	rootFrame.AttachWidget(rawSurface)
-	//rootFrame.AttachWidget(CreateLabelWidget("memes"))
 	rootFrame.AttachWidget(text)
 	rootFrame.AttachWidget(buttons)
 
