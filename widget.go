@@ -38,7 +38,7 @@ func drawLabelWidget(surface *canvas.Canvas, widget *LabelWidget, top, left, wid
 func drawSurfaceWidget(surface *canvas.Canvas, surfaceWidget *SurfaceWidget, top, left, width, height int) {
 	surface.FillRect(float64(left), float64(top), float64(width), float64(height))
 
-	surfaceWidget.renderCallback(surfaceWidget.windowSurface)
+	surfaceWidget.renderCallback(surfaceWidget.windowSurface, top, left, width, height)
 	//debugLayout(surface, top, left, width, height)
 }
 

@@ -48,7 +48,7 @@ func TestMain(t *testing.T) {
 	t.Log(app)
 }
 
-func drawBrowserFrame(surface *canvas.Canvas) {
+func drawBrowserFrame(surface *canvas.Canvas, top, left, width, height int) {
 	surface.SetFillStyle("#ff0000")
 	surface.FillRect(10, 10, 20, 20)
 }

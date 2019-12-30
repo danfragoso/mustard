@@ -6,7 +6,7 @@ import (
 )
 
 //CreateSurfaceWidget - Creates and returns a new Surface Widget
-func CreateSurfaceWidget(window *Window, frameFunction func(rawSurface *canvas.Canvas)) *SurfaceWidget {
+func CreateSurfaceWidget(window *Window, frameFunction func(rawSurface *canvas.Canvas, top, left, width, height int)) *SurfaceWidget {
 	var widgets []interface{}
 
 	return &SurfaceWidget{

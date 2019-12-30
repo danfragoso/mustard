@@ -6,7 +6,7 @@ import (
 	"github.com/tfriedel6/canvas/backend/goglbackend"
 )
 
-type WidgetRenderCallback func(surface *canvas.Canvas)
+type WidgetRenderCallback func(surface *canvas.Canvas, top, left, width, height int)
 type WidgetClickCallback func()
 
 type App struct {
