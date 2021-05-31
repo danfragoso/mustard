@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mustard ui docs</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.7.0/themes/prism-atom-dark.css" />
+  <style>
+    :root {
+      font-family: 'Inter', sans-serif;
+      --mustard: #FFBF50;
+    }
+
+    #app {
+      display: flex;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+
+    code[class*="language-"] {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .sidebar {
+      flex-shrink: 0;
+      width: 200px;
+      min-height: 100vh;
+      background: var(--mustard);
+    }
+
+    .sidebar-content {
+      position: fixed;
+      width: 200px;
+    }
+
+    .sidebar-content .links {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .sidebar-content .links a {
+      margin: 5px;
+    }
+
+    .mustard-title {
+      text-align: center;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 24px;
+      padding: 10px 20px;
+    }
+
+    .content {
+      padding: 20px;
+      max-width: 800px;
+    }
+
+    .section {
+      border-bottom: dotted 1px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .section .title {
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .section .description {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .section .body {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .section .alert {
+      background-color: yellow;
+      font-style: italic;
+      border-radius: 10px;
+      padding: 20px;
+      color: black;
+      border: dashed crimson 4px;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="sidebar">
+      <div class="sidebar-content">
+        <div class="mustard-title">
+          mustard ui docs
+        </div>
+        <div class="links">
+          <a href="#layouts">
+            Layout
+          </a>
+          <a href="#coreTypes">
+            Core Types
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="section">
+        <div class="title">
+          MUSTARD UI Docs
+        </div>
+        <div class="description">
+          Docs for the mustard ui framework
+        </div>
+        <div class="body">
+          ...
+        </div>
+      </div>
+
+      <div class="section">
+        <div id="layouts" class="title">Layout</div>
+        <div class="description">
+          How does the mustard ui layout works?
+        </div>
+        <div class="body">
+          <p>On mustard ui there is only one type of layout, the box.</p>
+          <p>The two main concepts of the box layout is it's orientation and it's alignment.</p>
+          <p>Orientation is controlled by the componentProp with the same name, it can be either Horizontal or Vertical. This property controls how it's children will be rendered, for example this is how childs in a Horizontal layout should be layed.</p>
+          <p class="alert">The Horizontal Orientation is the default one, in this case, the Orientation componentProp can be ommited.</p>
+          <div class="example">
+            <div style="display: flex; background: cornflowerblue;">
+              <div style="width: 50px; height: 50px; background: coral; margin: 10px;"></div>
+              <div style="width: 50px; height: 50px; background: coral; margin: 10px;"></div>
+            </div>
+          </div>
+          <pre>
+<code class="language-go">
+import . "mustard"
+
+func Child() {
+  return Box(&ComponentProps{
+    Background: nameToColor("coral"),
+    Height: 50, Width: 50,
+    MarginTop: 10, MarginRight: 10, MarginLeft: 10, MarginBottom: 10,
+  })
+}
+
+func HorizontalComponentExample() {
+  return Box(&ComponentProps{
+      Background: NameToColor("cornflowerblue"),
+    },
+    Child(),
+    Child(),
+  )
+}
+</code>
+          </pre>
+          <p>And the example below is the Vertical layout</p>
+          <div class="example">
+            <div style="display: flex; flex-direction: column; background: cornflowerblue;">
+              <div style="width: 50px; height: 50px; background: coral; margin: 10px;"></div>
+              <div style="width: 50px; height: 50px; background: coral; margin: 10px;"></div>
+            </div>
+          </div>
+          <pre>
+<code class="language-go">
+import . "mustard"
+
+func Child() {
+  return Box(&ComponentProps{
+    Background: nameToColor("coral"),
+    Height: 50, Width: 50,
+    MarginTop: 10, MarginRight: 10, MarginLeft: 10, MarginBottom: 10,
+  })
+}
+
+func HorizontalComponentExample() {
+  return Box(&ComponentProps{
+    Background: NameToColor("cornflowerblue"),
+      BoxProps: &BoxProps{
+        Orientation: Vertical,
+      },
+    }
+    Child(),
+    Child(),
+  )
+}
+</code>
+          </pre>
+          <p>For alignment, the values for the Alignment componentProp can be Start, Center or End.</p>
+          <p>Start Alignment</p>
+          <p class="alert">The Start Alignment is the default one, in this case, the Alignment componentProp can be ommited.</p>
+          <div class="example">
+            <div style="display: flex; flex-direction: column; align-items: flex-start; background: cornflowerblue;">
+              <div style="width: 50px; height: 50px; background: coral; margin: 10px;"></div>
+              <div style="width: 50px; height: 50px; background: coral; margin: 10px;"></div>
+            </div>
+          </div>
+          <pre>
+<code class="language-go">
+&ComponentProps {
+  ...,
+  BoxProps: &BoxProps{
+    Alignment: Start,
+               ^^^^^
+  },
+}
+</code>
+          </pre>
+          <p>Center Alignment</p>
+          <div class="example">
+            <div style="display: flex; flex-direction: column; align-items: center; background: cornflowerblue;">
+              <div style="width: 50px; height: 50px; background: coral; margin: 10px;"></div>
+              <div style="width: 50px; height: 50px; background: coral; margin: 10px;"></div>
+            </div>
+          </div>
+          <pre>
+<code class="language-go">
+&ComponentProps {
+  ...,
+  BoxProps: &BoxProps{
+    Alignment: Center,
+               ^^^^^
+  },
+}
+</code>
+          </pre>
+          <p>End Alignment</p>
+          <div class="example">
+            <div style="display: flex; flex-direction: column; align-items: flex-end; background: cornflowerblue;">
+              <div style="width: 50px; height: 50px; background: coral; margin: 10px;"></div>
+              <div style="width: 50px; height: 50px; background: coral; margin: 10px;"></div>
+            </div>
+          </div>
+          <pre>
+<code class="language-go">
+&ComponentProps {
+  ...,
+  BoxProps: &BoxProps{
+    Alignment: End,
+               ^^^^^
+  },
+}
+</code>
+          </pre>
+        </div>
+      </div>
+
+
+
+      <div class="section">
+        <div id="coreTypes" class="title">
+          Core Types
+        </div>
+        <div class="description">
+          Core types for the mustard ui framework
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam, expedita. Minus exercitationem, vitae, sit sint, soluta consectetur cum quos magnam pariatur illo unde? Suscipit optio aut iste libero explicabo officiis?
+        </div>
+        <div class="body">
+          <pre>
+            <code class="language-go">
+type Vector struct {
+  x, y float64
+}
+
+type Point Vector
+type Position Vector
+
+type Alignment byte
+const (
+  Start Alignment = iota
+  Center
+  End
+)
+
+type Orientation byte
+const (
+  Horizontal Orientation = iota
+  Vertical
+)
+            </code>
+          </pre>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">Widgets</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-go.min.js" integrity="sha512-SgF1uayJ2/8TV+MhLasqygnm++vYRXswmrR2ZAmUCL4pXtf+6KzUgXPpn10Y6xca658sxOQEOsoP3MChfhke5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
