@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mustard web example</title>
+</head>
+<body>
+  <h1>mustard web</h1>
+  <canvas id="canvas">no mustard for you</canvas>
+  <script src="./js/wasm_exec.js"></script>
+  <script>
+    const go = new Go();
+    (async _ => {
+      const bin = await fetch('./wasm/bin.wasm')
+      const buffer = await bin.arrayBuffer()
+      const result = await WebAssembly.instantiate(buffer, go.importObject)
+
+      await go.run(result.instance)
+    })()
+  </script>
+</body>
+</html>
