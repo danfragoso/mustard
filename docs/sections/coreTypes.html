@@ -1,0 +1,39 @@
+<div id="coreTypes" class="title">
+  Core Types
+</div>
+<div class="description">
+  Core types for the mustard ui framework
+  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam, expedita. Minus exercitationem, vitae, sit sint, soluta consectetur cum quos magnam pariatur illo unde? Suscipit optio aut iste libero explicabo officiis?
+</div>
+<div class="body">
+  <pre>
+    <code class="language-go">
+type Vector struct {
+  x, y float64
+}
+
+type Point Vector
+type Position Vector
+
+type Alignment byte
+const (
+  Start Alignment = iota
+  Center
+  End
+)
+
+type Orientation byte
+const (
+  Horizontal Orientation = iota
+  Vertical
+)
+
+type Color struct {
+  Red byte
+  Green byte
+  Blue byte
+  Alpha byte
+}
+    </code>
+  </pre>
+</div>
