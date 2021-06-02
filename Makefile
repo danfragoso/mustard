@@ -12,4 +12,4 @@ web:
 	@cd examples/web && npx http-server -o
 
 android:
-	@cd examples && GO111MODULE=on gomobile build -target=android main.go
+	@GO111MODULE=on gomobile build -target=android examples/*.go
