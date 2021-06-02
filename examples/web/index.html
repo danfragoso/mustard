@@ -9,8 +9,46 @@
 <body>
   <h1>mustard web</h1>
   <canvas id="canvas">no mustard for you</canvas>
+  <canvas id="native">no mustard for you</canvas>
   <script src="./js/wasm_exec.js"></script>
   <script>
+    const pixelData = new ImageData(1, 1);
+
+    const canvasWidth = 400;
+    const canvasHeight = 400;
+    const bytesPerPixel = 4; // R G B A
+
+    window.pixData = new Uint8ClampedArray(canvasWidth * canvasHeight * bytesPerPixel);
+    function renderNative(stride) {
+      const cv = document.getElementById("native");
+      cv.height = canvasHeight;
+	    cv.width = canvasWidth;
+	    const ctx = cv.getContext("2d");
+      console.time("native")
+      for (let x = 0; x <= canvasWidth; x++) {
+        for (let y = 0; y <= canvasHeight; y++) {
+          [pixelData.data[0], pixelData.data[1], pixelData.data[2], pixelData.data[3]] = pixDataAt(x, y, stride);
+          ctx.putImageData(pixelData, x, y);
+        }
+      }
+      console.timeEnd("native")
+    }
+
+    function pixDataAt(x, y, stride) {
+      const offset = y*stride + x*4;
+      return [window.pixData[offset], window.pixData[offset+1], window.pixData[offset+2], window.pixData[offset+3]];
+    }
+
+    const context = document.getElementById("canvas").getContext("2d");
+    function putPixelData(x, y, r, g, b, a) {
+      pixelData.data[0] = r;
+      pixelData.data[1] = g;
+      pixelData.data[2] = b;
+      pixelData.data[3] = a;
+
+      context.putImageData(pixelData, x, y);
+    }
+
     const go = new Go();
     (async _ => {
       const bin = await fetch('./wasm/bin.wasm')
@@ -19,6 +57,7 @@
 
       await go.run(result.instance)
     })()
+
   </script>
 </body>
 </html>

@@ -1,8 +1,20 @@
 package backend
 
-import "fmt"
+import (
+	"fmt"
+	"image"
+)
 
-func Render(msg string) {
-	fmt.Println("Hi from linux")
-	fmt.Println(msg)
+type linuxRenderer struct {
+	msg string
+}
+
+func (r *linuxRenderer) Render(buffer *image.RGBA) {
+	fmt.Println(r.msg)
+}
+
+func createPlatformRenderer() Renderer {
+	return &linuxRenderer{
+		msg: "Hi from the linux renderer",
+	}
 }
