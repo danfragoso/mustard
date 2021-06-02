@@ -5,17 +5,19 @@ import (
 	"image/color"
 
 	backend "github.com/danfragoso/mustard/backend"
+	device "github.com/danfragoso/mustard/device"
 )
 
 func Render() bool {
-	backend.Render(imgToRender())
+	w, h := device.GetViewportDimensions()
+	backend.Render(imgToRender(w, h))
 
 	return true
 }
 
-func imgToRender() *image.RGBA {
-	width := 400
-	height := 400
+func imgToRender(w, h float64) *image.RGBA {
+	width := int(w)
+	height := int(h)
 
 	upLeft := image.Point{0, 0}
 	lowRight := image.Point{width, height}

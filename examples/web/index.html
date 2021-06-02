@@ -5,22 +5,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>mustard web example</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: clip;
+    }
+  </style>
 </head>
 <body>
-  <h1>mustard web</h1>
   <canvas id="canvas">no mustard for you</canvas>
-  <canvas id="native">no mustard for you</canvas>
   <script src="./js/wasm_exec.js"></script>
   <script>
     const pixelData = new ImageData(1, 1);
 
-    const canvasWidth = 400;
-    const canvasHeight = 400;
+    const canvasWidth = window.innerWidth;
+    const canvasHeight = window.innerHeight;
     const bytesPerPixel = 4; // R G B A
 
     window.pixData = new Uint8ClampedArray(canvasWidth * canvasHeight * bytesPerPixel);
     function renderNative(stride) {
-      const cv = document.getElementById("native");
+      const cv = document.getElementById("canvas");
       cv.height = canvasHeight;
 	    cv.width = canvasWidth;
 	    const ctx = cv.getContext("2d");
@@ -37,16 +42,6 @@
     function pixDataAt(x, y, stride) {
       const offset = y*stride + x*4;
       return [window.pixData[offset], window.pixData[offset+1], window.pixData[offset+2], window.pixData[offset+3]];
-    }
-
-    const context = document.getElementById("canvas").getContext("2d");
-    function putPixelData(x, y, r, g, b, a) {
-      pixelData.data[0] = r;
-      pixelData.data[1] = g;
-      pixelData.data[2] = b;
-      pixelData.data[3] = a;
-
-      context.putImageData(pixelData, x, y);
     }
 
     const go = new Go();
