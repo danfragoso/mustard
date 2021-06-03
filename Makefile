@@ -4,12 +4,12 @@ run:
 	@go test
 
 linux:
-	@GOOS=linux go run examples/*.go
+	@GOOS=linux go run examples/desktop/*.go
 
 web:
-	@GOOS=js GOARCH=wasm go build -o bin.wasm examples/*.go
-	@mv bin.wasm examples/web/wasm/
-	@cd examples/web && npx http-server -o
+	@GOOS=js GOARCH=wasm go build -o bin.wasm examples/desktop/*.go
+	@mv bin.wasm examples/desktop/web/wasm/
+	@cd examples/desktop/web && npx http-server -o
 
 android:
-	@GO111MODULE=on gomobile build -target=android examples/*.go
+	@cd examples/mobile && GO111MODULE=on gomobile build -target=android --tags android .
